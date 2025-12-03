@@ -1,0 +1,33 @@
+name: Random Video Batch Poster
+
+on:
+  schedule:
+    # ၃၀ မိနစ်ခြား တစ်ခါ Run မည်
+    - cron: '*/30 * * * *' 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install telethon asyncio
+
+      - name: Run Bot
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          SESSION_STRING: ${{ secrets.SESSION_STRING }}
+          SOURCE_CHANNEL: ${{ secrets.SOURCE_CHANNEL }}
+          DEST_GROUP: ${{ secrets.DEST_GROUP }}
+        run: python bot.py
