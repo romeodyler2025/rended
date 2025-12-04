@@ -3,7 +3,7 @@ name: Random Video Batch Poster
 on:
   schedule:
     # ၃၀ မိနစ်ခြား တစ်ခါ Run မည်
-    - cron: '*/30 * * * *' 
+    - cron: '*/20 * * * *' 
   workflow_dispatch:
 
 jobs:
